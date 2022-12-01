@@ -163,7 +163,7 @@ init([MountPoint, CbMod, CbData]) ->
 		end,
 	true = filelib:is_file(PortPath),
     Port = open_port(
-		{spawn, PortPath++" -f "++MountPoint},
+		{spawn, PortPath++" -o nonempty -f "++MountPoint},
 		[{packet, 4}, nouse_stdio, exit_status, binary]
 		),
 	FsState = #efuse_fs{
