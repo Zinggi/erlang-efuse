@@ -162,8 +162,10 @@ init([MountPoint, CbMod, CbData]) ->
 		LibPath -> LibPath ++ "/priv/efuse"
 		end,
 	true = filelib:is_file(PortPath),
+	SpanPath = PortPath++" -o nonempty -f -- "++MountPoint,
+	io:fwrite(SpanPath++"~n", []),
     Port = open_port(
-		{spawn, PortPath++" -o nonempty -f "++MountPoint},
+		{spawn, SpanPath},
 		[{packet, 4}, nouse_stdio, exit_status, binary]
 		),
 	FsState = #efuse_fs{
